@@ -481,7 +481,8 @@ class Kwalify::Yaml::Parser < Kwalify::BaseParser
   end
 
 
-  def parse_block_text(column, rule, path, uniq_table)
+  def parse_block_text(level, rule, path, uniq_table)
+    column = level[1]
     _linenum = @linenum                                                    #*V
     _column  = @column                                                     #*V
     indicator = scan(/[|>]/)
