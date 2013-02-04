@@ -235,7 +235,8 @@ class Kwalify::Yaml::Parser < Kwalify::BaseParser
   def parse_block_value(level, rule, path, uniq_table, container)
     skip_spaces_and_comments()
     ## nil
-    return nil if @column <= level[1] || eos?
+    return nil if eos?
+    return nil if @column <= level[1] && !match?(/-\s+\w+/)
     ## anchor and alias
     name = nil
     if scan(/\&([-\w]+)/)
@@ -312,12 +313,15 @@ class Kwalify::Yaml::Parser < Kwalify::BaseParser
     _linenum = @linenum                                                    #*V
     _column  = @column                                                     #*V
     uniq_table = rule ? rule._uniqueness_check_table() : nil               #*V
-    while level[1] == @column && scan(/-\s+/)
+    while level[1] == @column && match?(/-\s+/)
+      just_scanned = scan(/-\s+/)
       path[-1] = i
       skip_spaces_and_comments()                                           #*V
       _linenum2 = @linenum
       _column2  = @column
-      val = parse_block_value(level, rule, path, uniq_table, seq)
+      val = (just_scanned =~ /^-\s*\n$/) ?
+        nil :
+        parse_block_value(level, rule, path, uniq_table, seq)
       add_to_seq(rule, seq, val, _linenum2, _column2)    # seq << val
       _set_error_info(_linenum, _column) do                                #*V
         @validator._validate(val, rule, path, @errors, @done, uniq_table, false) #*V

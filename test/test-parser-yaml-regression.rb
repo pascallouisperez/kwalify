@@ -62,4 +62,23 @@ YAML
       Kwalify::Yaml::Parser.new.parse(content)
       )
   end
+
+  def test_sequence5
+    content = <<-YAML
+- A
+
+-
+
+
+    - B
+
+
+-
+    YAML
+
+    assert_equal(
+      ["A", ["B"], nil],
+      Kwalify::Yaml::Parser.new.parse(content)
+      )
+  end
 end
