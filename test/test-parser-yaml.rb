@@ -45,9 +45,11 @@ class YamlParserTest < Test::Unit::TestCase
         #require 'pp'
         if @locations
           @locations.each do |path, expected_linenum, expected_column|
-            linenum, column = parser.location(path)
-            assert_equal(expected_linenum, linenum)
-            assert_equal(expected_column, column)
+            assert_equal(
+              [expected_linenum, expected_column],
+              parser.location(path),
+              "location of path #{path}"
+              )
           end
         end
       end
