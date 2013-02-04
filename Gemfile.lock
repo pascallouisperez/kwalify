@@ -1,0 +1,14 @@
+PATH
+  remote: .
+  specs:
+    kwalify (0.7.2)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  kwalify!

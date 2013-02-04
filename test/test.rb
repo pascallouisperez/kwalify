@@ -42,6 +42,7 @@ require 'kwalify/util/testcase-helper'
 if $0 == __FILE__
 
   require 'test-parser-yaml.rb'
+  require 'test-parser-yaml-regression.rb'
   require 'test-yaml-parser.rb'
   require 'test-rule.rb'
   require 'test-validator.rb'
