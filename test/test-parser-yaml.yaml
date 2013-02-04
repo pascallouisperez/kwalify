@@ -250,6 +250,40 @@ expected: |
 locations:
 ##
 ---
+name:  mapping7
+desc:  sequence at same column as previous key
+input: |
+  A:
+    B:
+      C:
+      - D: text
+expected: |
+  {"A"=>{"B"=>{"C"=>[{"D"=>"text"}]}}}
+locations:
+  - [ "/",           1, 1 ]
+  - [ "/A",          2, 3 ]
+  - [ "/A/B",        3, 5 ]
+  - [ "/A/B/C",      4, 7 ]
+  - [ "/A/B/C/D",    5, 7 ]
+##
+---
+name:  mapping8
+desc:  sequence at offset from column of previous key
+input: |
+  A:
+    B:
+      C:
+        - D: text
+expected: |
+  {"A"=>{"B"=>{"C"=>[{"D"=>"text"}]}}}
+locations:
+  - [ "/",           1, 1 ]
+  - [ "/A",          2, 3 ]
+  - [ "/A/B",        3, 5 ]
+  - [ "/A/B/C",      4, 7 ]
+  - [ "/A/B/C/D",    5, 9 ]
+##
+---
 name:  combination1
 desc:  seq of mapping
 #
