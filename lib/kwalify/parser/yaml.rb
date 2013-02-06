@@ -236,7 +236,7 @@ class Kwalify::Yaml::Parser < Kwalify::BaseParser
     skip_spaces_and_comments()
     ## nil
     return nil if eos?
-    return nil if @column <= level[1] && !match?(/-\s+\w+/)
+    return nil if @column <= level[1] && !match?(/-\s+[\w\{]+/)
     ## anchor and alias
     name = nil
     if scan(/\&([-\w]+)/)

@@ -81,4 +81,22 @@ YAML
       Kwalify::Yaml::Parser.new.parse(content)
       )
   end
+
+  def test_sequence6
+    content = <<-YAML
+A:
+- {B1: v1}
+- {B2: v2}
+- [1, 2, 3]
+- B3
+- |
+  B4
+- B5
+    YAML
+
+    assert_equal(
+      {"A"=>[{"B1"=>"v1"}, {"B2"=>"v2"}, [1, 2, 3], "B3", "B4\n", "B5"]},
+      Kwalify::Yaml::Parser.new.parse(content)
+      )
+  end
 end

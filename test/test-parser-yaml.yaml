@@ -138,6 +138,22 @@ expected: |
 locations:
 ##
 ---
+name:  sequence8
+desc:  sequece with many different items in the list
+input: |
+  A:
+  - {B1: v1}
+  - {B2: v2}
+  - [1, 2, 3]
+  - B3
+  - |
+    B4
+  - B5
+expected: |
+  {"A"=>[{"B1"=>"v1"}, {"B2"=>"v2"}, [1, 2, 3], "B3", "B4\n", "B5"]}
+locations:
+##
+---
 name:  mapping1
 desc:  basic mapping
 input: |
